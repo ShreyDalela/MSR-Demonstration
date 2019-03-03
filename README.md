@@ -93,7 +93,6 @@ The repository contains all resources for MSRCOSMOS test following is the folder
     .
     ├── couchdb_container.yml
     ├── dockercompose                  
-    │   ├── DB                           # Files for CouchDB Deployment    
-    |   |   ├── dockerfile               
+    │   ├── DB                           # Files for CouchDB Deployment               
     |   |   └── docker-compose.yml
     └── ...
