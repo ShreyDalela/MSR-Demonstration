@@ -1,0 +1,15 @@
+---
+ - hosts: database
+   tasks:
+
+     - name: Creating new directory for git clone
+       file:
+         path: /etc/ansible/dockercompose/DB
+         owner: cont
+         state: directory
+
+     - name: Deploying couch database
+       docker_service: 
+         project_src: /etc/ansible/dockercompose/DB/docker-compose.yml 
+         build: yes
+         state: present

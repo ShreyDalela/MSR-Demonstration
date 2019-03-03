@@ -1,0 +1,33 @@
+---
+- hosts: all
+  gather_facts: yes
+  remote_user: cont
+  vars:
+    latest_package:
+       - docker
+       - openssl
+       - git
+   
+
+  tasks:
+
+    - name: Install nvm
+      shell: >
+        curl https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | sh
+        creates=/home/{{ ansible_user_id }}/.nvm/nvm.sh
+
+    - name: Install node and set version
+      shell: >
+        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 0.10 && nvm alias default 0.10"
+        creates=/home/{{ ansible_user_id }}/.nvm/alias
+
+    - name: Ensure docker-compose is installed and available
+      get_url: 
+          url : https://github.com/docker/compose/releases/download/1.23.2/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
+          dest: /usr/local/bin/docker-compose
+          mode: 'u+x,g+x'
+  
+    - name: Deploying packages to MSR-test-Instance-1 and MSR-test-Instance-2 with specific versions
+      apt:
+        name: "{{ latest_package }}"
+        state: latest

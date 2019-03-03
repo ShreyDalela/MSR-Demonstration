@@ -1,0 +1,24 @@
+---
+ - hosts: webserver
+   tasks:
+
+     - name: Creating new directory for git clone
+       file:
+         path: /etc/ansible/dockercompose/webapp
+         owner: cont
+         state: directory
+
+     - name:  Cloning index.html and docker-compose.yml to created directory
+       git:
+         repo: git@github.com:ShreyDalela/MSR.git
+         dest: /etc/ansible/dockercompose/webapp
+         accept_hostkey: yes
+         force: yes
+         recursive: no
+         key_file: /home/cont/.ssh/id_rsa
+
+     - name: Deploying webserver
+       docker_service: 
+         project_src: /etc/ansible/dockercompose/webapp/docker-compose.yml 
+         build: yes
+         state: present
