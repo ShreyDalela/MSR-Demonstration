@@ -11,8 +11,7 @@ The repository contains all resources for MSRCOSMOS test following is the folder
     |   |   ├── index.html
     |   |   ├── dockerfile 
     |   |   └── docker-compose.yml
-    │   ├── DB
-    |   |   ├── dockerfile               
+    │   ├── DB             
     |   |   └── docker-compose.yml
     └── ...
 
