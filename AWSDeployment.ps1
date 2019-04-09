@@ -1,4 +1,5 @@
-﻿$access_key = Read-Host('Enter access Key')
+#AWS IaaS Deployment
+$access_key = Read-Host('Enter access Key')
 $secret_key = Read-Host('Enter Secret Key')
 
 Set-AWSCredential -AccessKey $access_key -SecretKey $secret_key -StoreAs MSRProfile
